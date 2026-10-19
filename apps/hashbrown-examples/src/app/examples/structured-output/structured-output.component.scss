@@ -1,0 +1,101 @@
+.hint {
+  color: var(--app-text-muted);
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.plan-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.plan-title {
+  font-size: 22px;
+}
+
+.plan-vibe {
+  color: var(--app-text-muted);
+  font-style: italic;
+}
+
+.plan-days {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  animation: day-in 200ms ease-out;
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.day-title {
+  font-size: 16px;
+}
+
+.day-remove {
+  border: 0;
+  background: none;
+  color: var(--app-text-muted);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.day-activities {
+  margin: 0;
+  padding-inline-start: 18px;
+}
+
+.day-activity {
+  margin-block: 2px;
+}
+
+.raw {
+  font-size: 13px;
+}
+
+.raw-summary {
+  cursor: pointer;
+  color: var(--app-text-muted);
+}
+
+.raw-json {
+  padding: 12px;
+  overflow: auto;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-sm);
+  font-family: var(--app-font-mono);
+  font-size: 12px;
+}
+
+@keyframes day-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

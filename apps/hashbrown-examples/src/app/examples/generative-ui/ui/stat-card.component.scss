@@ -1,0 +1,42 @@
+:host {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'label trend'
+    'value trend';
+  gap: 2px 12px;
+  padding-block: 12px;
+  padding-inline: 16px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  min-inline-size: 160px;
+}
+
+.stat-label {
+  grid-area: label;
+  font-size: 12px;
+  color: var(--app-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.stat-value {
+  grid-area: value;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.stat-trend {
+  grid-area: trend;
+  align-self: center;
+  color: var(--app-text-muted);
+}
+
+.stat-up .stat-trend {
+  color: var(--app-success);
+}
+
+.stat-down .stat-trend {
+  color: var(--app-danger);
+}

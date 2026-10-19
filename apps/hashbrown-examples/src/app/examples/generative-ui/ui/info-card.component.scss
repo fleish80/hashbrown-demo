@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-inline-start: 4px solid var(--app-accent);
+  border-radius: var(--app-radius);
+}
+
+.info-title {
+  font-size: 16px;
+}
+
+.info-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}

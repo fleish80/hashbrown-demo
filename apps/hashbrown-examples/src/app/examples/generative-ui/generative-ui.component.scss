@@ -1,0 +1,43 @@
+.thread {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  block-size: 500px;
+  overflow-y: auto;
+  padding: 16px;
+  background: var(--app-surface-alt);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+}
+
+.thread-empty {
+  margin: auto;
+  color: var(--app-text-muted);
+  text-align: center;
+}
+
+.bubble {
+  max-inline-size: 80%;
+  padding-block: 8px;
+  padding-inline: 14px;
+  border-radius: var(--app-radius);
+}
+
+.bubble-user {
+  align-self: flex-end;
+  background: var(--app-accent);
+  color: var(--app-accent-contrast);
+}
+
+.bubble-error {
+  align-self: center;
+  color: var(--app-danger);
+  font-size: 13px;
+}
+
+.generated {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-self: stretch;
+}

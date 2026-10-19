@@ -1,0 +1,39 @@
+<app-example-page>
+  @let thread = messages();
+
+  <div class="thread" [appScrollToBottom]="thread">
+    @if (thread.length === 0) {
+      <p class="thread-empty">
+        Try: “How are we doing this month?” or “Show me growth vs. performance.”
+      </p>
+    }
+    @for (message of thread; track $index) {
+      @switch (message.role) {
+        @case ('user') {
+          <div class="bubble bubble-user">{{ message.content }}</div>
+        }
+        @case ('assistant') {
+          <div class="generated">
+            <hb-render-message [message]="message" />
+          </div>
+        }
+        @case ('error') {
+          <div class="bubble bubble-error">{{ message.content }}</div>
+        }
+      }
+    }
+  </div>
+
+  <app-ai-status
+    [busy]="chat.isLoading()"
+    busyLabel="Composing…"
+    [error]="chat.error()"
+  />
+
+  <app-chat-composer
+    placeholder="Ask about the metrics…"
+    [busy]="chat.isLoading()"
+    (send)="send($event)"
+    (stop)="stop()"
+  />
+</app-example-page>

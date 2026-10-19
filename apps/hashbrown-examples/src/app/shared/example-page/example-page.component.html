@@ -1,0 +1,27 @@
+@let current = example();
+
+<article class="page">
+  @if (current) {
+    <header class="page-header">
+      <h1 class="page-title">{{ current.title }}</h1>
+      <p class="page-description">{{ current.description }}</p>
+      <dl class="page-meta">
+        <dt class="page-meta-label">Hashbrown</dt>
+        <dd class="page-meta-value">
+          @for (api of current.hashbrownApis; track api) {
+            <code class="page-chip">{{ api }}</code>
+          }
+        </dd>
+        <dt class="page-meta-label">Angular</dt>
+        <dd class="page-meta-value">
+          @for (api of current.angularApis; track api) {
+            <code class="page-chip">{{ api }}</code>
+          }
+        </dd>
+      </dl>
+    </header>
+  }
+  <section class="page-body">
+    <ng-content />
+  </section>
+</article>

@@ -1,0 +1,23 @@
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" routerLink="/">
+      <span class="brand-mark">🥔</span>
+      <span class="brand-name">Hashbrown Examples</span>
+    </a>
+    <nav class="nav" aria-label="Examples">
+      @for (example of examples; track example.slug) {
+        <a
+          class="nav-link"
+          [routerLink]="['/', example.slug]"
+          routerLinkActive="nav-link-active"
+        >
+          <span class="nav-title">{{ example.title }}</span>
+          <span class="nav-summary">{{ example.summary }}</span>
+        </a>
+      }
+    </nav>
+  </aside>
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>

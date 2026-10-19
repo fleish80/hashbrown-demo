@@ -1,0 +1,21 @@
+<header class="hero">
+  <h1 class="hero-title">Hashbrown × Angular</h1>
+  <p class="hero-text">
+    Each example is a lazy-loaded route registered in one place. Pick one to
+    see the pattern, then copy its folder to start your own.
+  </p>
+</header>
+
+<section class="grid">
+  @for (example of examples; track example.slug) {
+    <a class="card" [routerLink]="['/', example.slug]">
+      <h2 class="card-title">{{ example.title }}</h2>
+      <p class="card-text">{{ example.summary }}</p>
+      <ul class="chips">
+        @for (api of example.hashbrownApis; track api) {
+          <li class="chip">{{ api }}</li>
+        }
+      </ul>
+    </a>
+  }
+</section>

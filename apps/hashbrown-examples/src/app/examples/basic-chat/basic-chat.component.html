@@ -1,0 +1,64 @@
+<!-- Step 8: everything below is driven by signals, so it re-renders on its own as events stream in. -->
+<app-example-page>
+  <!-- @let reads each signal once per render and names the result for the rest of the template. -->
+  @let thread = messages();
+  @let receiving = chat.isReceiving();
+
+  <!-- The directive re-runs whenever `thread` changes and scrolls to the newest message. -->
+  <div class="thread" [appScrollToBottom]="thread">
+    @if (thread.length === 0) {
+      <p class="thread-empty">Say hello to start the conversation.</p>
+    }
+
+    <!-- Hashbrown messages have no id and are rebuilt on every chunk, so position is the only stable key. -->
+    @for (message of thread; track $index) {
+      @switch (message.role) {
+        @case ('user') {
+          <div class="bubble bubble-user">{{ message.content }}</div>
+        }
+        @case ('assistant') {
+          <!--
+            While the reply streams, this message's `content` keeps growing: on each TEXT_MESSAGE_CONTENT
+            delta Hashbrown emits a new message with the longer text. A tool-only turn has no content yet.
+          -->
+          @if (message.content) {
+            <div class="bubble bubble-assistant">
+              <!--
+                isComplete tells the markdown renderer whether more text may still arrive. While false,
+                it tolerates half-written syntax such as an unclosed **bold** or ``` code fence.
+                Only the last message can still be streaming.
+              -->
+              <hb-magic-text
+                [text]="message.content"
+                [isComplete]="!receiving || !$last"
+              />
+            </div>
+          }
+        }
+        @case ('error') {
+          <!--
+            Hashbrown appends an error message whenever a run fails (HTTP error or a RUN_ERROR event).
+            While that failure is current, the status line below shows it. After the next successful
+            send it stays in the history and renders here.
+          -->
+          <div class="bubble bubble-error">{{ message.content }}</div>
+        }
+      }
+    }
+  </div>
+
+  <!-- isLoading covers the whole round trip. error() covers failures such as an HTTP 503. -->
+  <app-ai-status [busy]="chat.isLoading()" [error]="chat.error()" />
+
+  <!-- Step 2: the composer is a plain signal form. It only emits text; it knows nothing about Hashbrown. -->
+  <app-chat-composer
+    placeholder="Ask anything…"
+    [busy]="chat.isLoading()"
+    (send)="send($event)"
+    (stop)="stop()"
+  />
+
+  @if (thread.length > 0) {
+    <button class="clear-button" type="button" (click)="clear()">Clear conversation</button>
+  }
+</app-example-page>

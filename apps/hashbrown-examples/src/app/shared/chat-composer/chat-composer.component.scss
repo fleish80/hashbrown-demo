@@ -1,0 +1,40 @@
+.composer {
+  display: flex;
+  gap: 8px;
+}
+
+.composer-input {
+  flex: 1;
+  padding-block: 10px;
+  padding-inline: 14px;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-sm);
+  background: var(--app-surface);
+  color: var(--app-text);
+
+  &:focus-visible {
+    outline: 2px solid var(--app-accent);
+    outline-offset: 1px;
+  }
+}
+
+.composer-button {
+  padding-block: 10px;
+  padding-inline: 18px;
+  border: 0;
+  border-radius: var(--app-radius-sm);
+  background: var(--app-accent);
+  color: var(--app-accent-contrast);
+  font-weight: 600;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.composer-button-stop {
+  background: var(--app-danger);
+  color: #fff;
+}

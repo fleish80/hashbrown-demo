@@ -1,0 +1,57 @@
+<app-example-page>
+  <app-chat-composer
+    placeholder="Which city? e.g. Lisbon"
+    [busy]="itinerary.isLoading()"
+    (send)="planTrip($event)"
+    (stop)="stop()"
+  />
+
+  <app-ai-status
+    [busy]="itinerary.isLoading()"
+    busyLabel="Planning…"
+    [error]="itinerary.error()"
+  />
+
+  @let result = plan();
+
+  @if (result) {
+    <section class="plan">
+      <header class="plan-header">
+        <h2 class="plan-title">{{ result.city }}</h2>
+        @if (result.vibe) {
+          <p class="plan-vibe">{{ result.vibe }}</p>
+        }
+      </header>
+
+      <div class="plan-days">
+        @for (day of days(); track day.title) {
+          <article class="day">
+            <header class="day-header">
+              <h3 class="day-title">{{ day.title }}</h3>
+              <button
+                class="day-remove"
+                type="button"
+                aria-label="Remove day"
+                (click)="removeDay(day)"
+              >
+                ×
+              </button>
+            </header>
+            <ul class="day-activities">
+              @for (activity of day.activities; track activity) {
+                <li class="day-activity">{{ activity }}</li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+    </section>
+
+    <details class="raw">
+      <summary class="raw-summary">Raw streamed value</summary>
+      <pre class="raw-json">{{ result | json }}</pre>
+    </details>
+  } @else if (!itinerary.isLoading()) {
+    <p class="hint">Type a city and press Send. Watch the days appear one by one as the JSON streams in.</p>
+  }
+</app-example-page>

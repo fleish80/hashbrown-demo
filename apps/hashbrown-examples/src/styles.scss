@@ -1,0 +1,62 @@
+:root {
+  --app-bg: #f6f7f9;
+  --app-surface: #ffffff;
+  --app-surface-alt: #eef1f5;
+  --app-border: #d9dee6;
+  --app-text: #1c2230;
+  --app-text-muted: #5f6b7d;
+  --app-accent: #d9642b;
+  --app-accent-contrast: #ffffff;
+  --app-danger: #c0392b;
+  --app-success: #2e8b57;
+  --app-radius: 12px;
+  --app-radius-sm: 8px;
+  --app-font: 'Inter', system-ui, sans-serif;
+  --app-font-mono: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --app-bg: #121519;
+    --app-surface: #1b2027;
+    --app-surface-alt: #232a33;
+    --app-border: #313a46;
+    --app-text: #e8ecf1;
+    --app-text-muted: #9aa6b6;
+    --app-accent: #f08a4b;
+    --app-accent-contrast: #1b1208;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  block-size: 100%;
+}
+
+body {
+  font-family: var(--app-font);
+  background: var(--app-bg);
+  color: var(--app-text);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}

@@ -1,0 +1,39 @@
+{
+  "name": "api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/api/src",
+  "projectType": "application",
+  "tags": ["scope:api"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": ["production", "^production"],
+      "outputs": ["{projectRoot}/dist"],
+      "options": {
+        "cwd": "apps/api",
+        "command": "tsc -p tsconfig.app.json"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "continuous": true,
+      "options": {
+        "cwd": "apps/api",
+        "command": "node --watch --enable-source-maps --import @swc-node/register/esm-register src/main.ts",
+        "env": {
+          "SWC_NODE_PROJECT": "tsconfig.app.json"
+        }
+      }
+    },
+    "start": {
+      "executor": "nx:run-commands",
+      "continuous": true,
+      "dependsOn": ["build"],
+      "options": {
+        "cwd": "apps/api",
+        "command": "node --enable-source-maps dist/main.js"
+      }
+    }
+  }
+}

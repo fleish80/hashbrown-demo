@@ -1,0 +1,94 @@
+{
+  "name": "hashbrown-examples",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/hashbrown-examples/src",
+  "tags": [
+    "scope:examples"
+  ],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/hashbrown-examples",
+        "browser": "apps/hashbrown-examples/src/main.ts",
+        "tsConfig": "apps/hashbrown-examples/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/hashbrown-examples/public"
+          }
+        ],
+        "styles": [
+          "apps/hashbrown-examples/src/styles.scss"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "1mb",
+              "maximumError": "2mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      }
+    },
+    "serve": {
+      "continuous": true,
+      "executor": "@angular/build:dev-server",
+      "defaultConfiguration": "development",
+      "configurations": {
+        "production": {
+          "buildTarget": "hashbrown-examples:build:production"
+        },
+        "development": {
+          "buildTarget": "hashbrown-examples:build:development"
+        }
+      },
+      "options": {
+        "proxyConfig": "apps/hashbrown-examples/proxy.conf.json",
+        "port": 4300
+      },
+      "dependsOn": [
+        "api:serve"
+      ]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    },
+    "serve-static": {
+      "continuous": true,
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "hashbrown-examples:build",
+        "staticFilePath": "dist/apps/hashbrown-examples/browser",
+        "spa": true
+      }
+    }
+  }
+}

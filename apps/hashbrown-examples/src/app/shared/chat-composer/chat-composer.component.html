@@ -1,0 +1,18 @@
+<form class="composer" novalidate (submit)="onSubmit($event)">
+  <input
+    class="composer-input"
+    type="text"
+    autocomplete="off"
+    [placeholder]="placeholder()"
+    [formField]="composer.text"
+  />
+  @if (busy()) {
+    <button class="composer-button composer-button-stop" type="button" (click)="stop.emit()">
+      Stop
+    </button>
+  } @else {
+    <button class="composer-button" type="submit" [disabled]="composer().invalid()">
+      Send
+    </button>
+  }
+</form>

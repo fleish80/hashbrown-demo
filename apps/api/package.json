@@ -1,0 +1,5 @@
+{
+  "name": "@hashbrown-demo/api",
+  "private": true,
+  "type": "module"
+}

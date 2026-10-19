@@ -1,0 +1,72 @@
+<app-example-page>
+  @let thread = messages();
+  @let receiving = chat.isReceiving();
+
+  <div class="layout">
+    <section class="panel">
+      <header class="panel-header">
+        <h2 class="panel-title">Todos</h2>
+        <span class="panel-count">{{ todos.openCount() }} open</span>
+      </header>
+      <ul class="todo-list">
+        @for (todo of todos.todos(); track todo.id) {
+          <li class="todo" [class.todo-done]="todo.done">
+            <span class="todo-id">#{{ todo.id }}</span>
+            <span class="todo-title">{{ todo.title }}</span>
+          </li>
+        } @empty {
+          <li class="todo-empty">Nothing to do. Ask the assistant to add something.</li>
+        }
+      </ul>
+    </section>
+
+    <section class="chat">
+      <div class="thread" [appScrollToBottom]="thread">
+        @if (thread.length === 0) {
+          <p class="thread-empty">
+            Try: “add buy milk”, “what's left?”, or “mark #2 as done”.
+          </p>
+        }
+        @for (message of thread; track $index) {
+          @switch (message.role) {
+            @case ('user') {
+              <div class="bubble bubble-user">{{ message.content }}</div>
+            }
+            @case ('assistant') {
+              @if (message.toolCalls.length > 0) {
+                <div class="tool-calls">
+                  @for (call of message.toolCalls; track call.toolCallId) {
+                    <code class="tool-call" [class.tool-call-pending]="call.status !== 'done'">
+                      {{ call.name }}({{ call.args | json }})
+                    </code>
+                  }
+                </div>
+              }
+              @if (message.content) {
+                <div class="bubble bubble-assistant">
+                  <hb-magic-text [text]="message.content" [isComplete]="!receiving || !$last" />
+                </div>
+              }
+            }
+            @case ('error') {
+              <div class="bubble bubble-error">{{ message.content }}</div>
+            }
+          }
+        }
+      </div>
+
+      <app-ai-status
+        [busy]="chat.isLoading()"
+        [busyLabel]="chat.isRunningToolCalls() ? 'Running tools…' : 'Thinking…'"
+        [error]="chat.error()"
+      />
+
+      <app-chat-composer
+        placeholder="Tell me what to do with the list…"
+        [busy]="chat.isLoading()"
+        (send)="send($event)"
+        (stop)="stop()"
+      />
+    </section>
+  </div>
+</app-example-page>
