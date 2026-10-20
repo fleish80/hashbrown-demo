@@ -54,7 +54,7 @@ describe('ReplayService', () => {
         ReplayService,
         {
           provide: hashbrownConfig.KEY,
-          useValue: { provider: 'replay', model: 'recorded fixtures', fallbackModels: [], firstEventTimeoutMs: 1000, replay: { fixturesDir: dir, delayMs: 0, record: false } },
+          useValue: { provider: 'replay', model: 'recorded fixtures', fallbackModels: [], firstEventTimeoutMs: 1000, ollamaHost: 'http://localhost:11434', replay: { fixturesDir: dir, delayMs: 0, record: false } },
         },
       ],
     }).compile();

@@ -37,7 +37,8 @@ npm start              # http://localhost:4300
 - `src/run/run.controller.ts` streams `POST /api/run` as server-sent events. It aborts the OpenAI call when the client disconnects.
 - `src/run/run.service.ts` calls the Hashbrown Google adapter (or the OpenAI one when `LLM_PROVIDER=openai`) and throws a 503 when no key is configured.
 - `src/run/model-fallback.ts` retries a run on the next model in `GEMINI_MODEL` when Google reports the model overloaded, or when it sends nothing for `MODEL_FIRST_EVENT_TIMEOUT_MS` (default 20 seconds), before any output streams. The default chain ends with the Gemini 3.5 and 3.1 Flash Lite models, which answer when the full Flash models report high demand. Keep the list to Gemini 3 models: 2.5 models reject tool calls combined with JSON output, which generative UI needs.
-- `src/replay/` is a fourth provider, `LLM_PROVIDER=replay`, that streams recorded runs from `apps/api/fixtures` instead of calling a model. See "Presenting" below.
+- `LLM_PROVIDER=ollama` runs a local model through the Ollama daemon with `@hashbrownai/ollama`; no key, `OLLAMA_MODEL` and `OLLAMA_HOST` in `.env`. See "Using Ollama" below.
+- `src/replay/` is a fifth provider, `LLM_PROVIDER=replay`, that streams recorded runs from `apps/api/fixtures` instead of calling a model. See "Presenting" below.
 - `src/health/health.controller.ts` serves `GET /api/health`.
 - Configuration comes from `@nestjs/config`, which reads `apps/api/.env`.
 
@@ -63,6 +64,20 @@ ant --profile personal auth login
 ```
 
 `GET /api/health` reports `"credentials": "sdk-default"` when the API is relying on the profile. Requests through either route are billed to the Console organization you sign in to. The adapter's 4,096-token reply cap is raised to 64,000 in `run.service.ts`, because Claude's thinking counts toward that cap.
+
+## Using Ollama
+
+Install [Ollama](https://ollama.com), pull a model, and point the API at it:
+
+```bash
+ollama pull qwen3:8b
+```
+
+Set `LLM_PROVIDER=ollama` and `OLLAMA_MODEL=qwen3:8b` in `apps/api/.env` and restart `npm start`. `GET /api/health` reports `"credentials": "none"`. Basic chat works with any chat model, but tool calling and generative UI need a model with tool support (Llama 3.2, Qwen 3, Mistral); a model without it, such as phi3 or gemma3, ends those runs with a `RUN_ERROR` saying the model does not support tools, which the examples show as the error line.
+
+Two Ollama-specific adjustments live in `run.service.ts`. Ollama's constrained JSON output stops small models from emitting a tool call, so a run that still has tools to call is sent without the response schema; once the tool result is in the history the schema is applied. And a generative UI run whose answer is an empty `{"ui":[]}` is asked again, up to three times, before anything reaches the browser.
+
+Even so, a 3B model such as Llama 3.2 is unreliable at the component-tree schema: it often returns one tile, garbled values or an empty tree. Chat and tool calling are fine locally; for structured output and generative UI use a larger model (Qwen 3 at 8B, Llama 3.1 at 8B) or Gemini.
 
 ## Presenting
 

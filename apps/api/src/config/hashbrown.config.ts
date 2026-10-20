@@ -3,13 +3,14 @@ import { existsSync, readdirSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 
-/** 'replay' serves recorded fixtures instead of calling a model (see src/replay). */
-export const LLM_PROVIDERS = ['google', 'openai', 'anthropic', 'replay'] as const;
+/** 'ollama' runs a local model; 'replay' serves recorded fixtures instead of calling a model (see src/replay). */
+export const LLM_PROVIDERS = ['google', 'openai', 'anthropic', 'ollama', 'replay'] as const;
 export type LlmProvider = (typeof LLM_PROVIDERS)[number];
 export type ModelProvider = Exclude<LlmProvider, 'replay'>;
 
 interface ProviderSettings {
-  readonly keyVar: string;
+  /** Unset for a provider that takes no key at all (Ollama). */
+  readonly keyVar?: string;
   readonly modelVar: string;
   readonly defaultModel: string;
   /** False when the SDK can find credentials on its own if no key is set. */
@@ -26,7 +27,11 @@ const PROVIDERS: Record<ModelProvider, ProviderSettings> = {
   openai: { keyVar: 'OPENAI_API_KEY', modelVar: 'OPENAI_MODEL', defaultModel: 'gpt-5-mini', keyRequired: true },
   // Without ANTHROPIC_API_KEY the Anthropic SDK falls back to ANTHROPIC_AUTH_TOKEN or an `ant auth login` profile.
   anthropic: { keyVar: 'ANTHROPIC_API_KEY', modelVar: 'CLAUDE_MODEL', defaultModel: 'claude-opus-5-5', keyRequired: false },
+  // Local models through the Ollama daemon. Tool calling and generative UI need a model that supports tools.
+  ollama: { modelVar: 'OLLAMA_MODEL', defaultModel: 'qwen3:8b', keyRequired: false },
 };
+
+export const DEFAULT_OLLAMA_HOST = 'http://localhost:11434';
 
 export function isLlmProvider(value: unknown): value is LlmProvider {
   return (LLM_PROVIDERS as readonly unknown[]).includes(value);
@@ -38,7 +43,7 @@ export function missingKeyMessage(provider: ModelProvider): string {
     const login = profile ? `ant --profile ${profile} auth login` : 'ant auth login';
     return `No Claude credentials found. Set ANTHROPIC_API_KEY in apps/api/.env, or run \`${login}\`, then restart the API.`;
   }
-  return `${PROVIDERS[provider].keyVar} is not set on the server. Copy apps/api/.env.example to apps/api/.env and fill it in.`;
+  return `${PROVIDERS[provider].keyVar ?? 'The API key'} is not set on the server. Copy apps/api/.env.example to apps/api/.env and fill it in.`;
 }
 
 /** True when the Anthropic SDK could authenticate without an API key: an auth token, or a saved `ant auth login` profile. */
@@ -97,6 +102,7 @@ export const hashbrownConfig = registerAs('hashbrown', () => {
       model: 'recorded fixtures',
       fallbackModels: [] as string[],
       firstEventTimeoutMs,
+      ollamaHost: process.env['OLLAMA_HOST'] || DEFAULT_OLLAMA_HOST,
       replay: replaySettings(),
     };
   }
@@ -108,11 +114,12 @@ export const hashbrownConfig = registerAs('hashbrown', () => {
     .filter(Boolean);
   return {
     provider,
-    apiKey: process.env[keyVar] || undefined,
+    apiKey: keyVar ? process.env[keyVar] || undefined : undefined,
     keyRequired,
     model: models[0] ?? defaultModel,
     fallbackModels: models.slice(1),
     firstEventTimeoutMs,
+    ollamaHost: process.env['OLLAMA_HOST'] || DEFAULT_OLLAMA_HOST,
     replay: replaySettings(),
   };
 });

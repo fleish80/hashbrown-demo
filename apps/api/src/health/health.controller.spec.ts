@@ -9,7 +9,7 @@ async function createController(
 ): Promise<HealthController> {
   const moduleRef = await Test.createTestingModule({
     controllers: [HealthController],
-    providers: [{ provide: hashbrownConfig.KEY, useValue: { provider, apiKey, keyRequired: provider !== 'anthropic', model: 'test-model', fallbackModels: [], firstEventTimeoutMs: 1000, replay: { fixturesDir: 'fixtures', delayMs: 0, record: false } } }],
+    providers: [{ provide: hashbrownConfig.KEY, useValue: { provider, apiKey, keyRequired: provider !== 'anthropic', model: 'test-model', fallbackModels: [], firstEventTimeoutMs: 1000, ollamaHost: 'http://localhost:11434', replay: { fixturesDir: 'fixtures', delayMs: 0, record: false } } }],
   }).compile();
   return moduleRef.get(HealthController);
 }
@@ -26,6 +26,11 @@ describe('HealthController', () => {
   it('should report replay as needing no credentials', async () => {
     const result = (await createController(undefined, 'replay')).check();
     expect(result).toMatchObject({ ok: true, provider: 'replay', credentials: 'none' });
+  });
+
+  it('should report Ollama as needing no credentials', async () => {
+    const result = (await createController(undefined, 'ollama')).check();
+    expect(result).toMatchObject({ ok: true, provider: 'ollama', credentials: 'none' });
   });
 
   it('should report Claude without a key as using the SDK credential chain', async () => {

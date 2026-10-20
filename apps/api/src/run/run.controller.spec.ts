@@ -4,7 +4,7 @@ import request from 'supertest';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { type HashbrownConfig, hashbrownConfig } from '../config/hashbrown.config.js';
 import { RunModule } from './run.module.js';
-import { withClaudeDefaults } from './run.service.js';
+import { withClaudeDefaults, withOllamaDefaults } from './run.service.js';
 
 const googleStream = vi.hoisted(() => vi.fn());
 const openaiStream = vi.hoisted(() => vi.fn());
@@ -12,6 +12,8 @@ const anthropicStream = vi.hoisted(() => vi.fn());
 vi.mock('@hashbrownai/google', () => ({ HashbrownGoogle: { stream: { text: googleStream } } }));
 vi.mock('@hashbrownai/openai', () => ({ HashbrownOpenAI: { stream: { text: openaiStream } } }));
 vi.mock('@hashbrownai/anthropic', () => ({ HashbrownAnthropic: { stream: { text: anthropicStream } } }));
+const ollamaStream = vi.hoisted(() => vi.fn());
+vi.mock('@hashbrownai/ollama', () => ({ HashbrownOllama: { stream: { text: ollamaStream } } }));
 
 const RUN_INPUT = { threadId: 't', runId: 'r', messages: [], tools: [] };
 const REPLAY = { fixturesDir: 'fixtures', delayMs: 0, record: false };
@@ -50,10 +52,11 @@ describe('POST /run', () => {
     googleStream.mockReset();
     openaiStream.mockReset();
     anthropicStream.mockReset();
+    ollamaStream.mockReset();
   });
 
   it('should return 503 naming the missing key', async () => {
-    app = await createApp({ provider: 'google', apiKey: undefined, keyRequired: true, model: 'm', fallbackModels: [], firstEventTimeoutMs: 1000, replay: REPLAY });
+    app = await createApp({ provider: 'google', apiKey: undefined, keyRequired: true, model: 'm', fallbackModels: [], firstEventTimeoutMs: 1000, ollamaHost: 'http://localhost:11434', replay: REPLAY });
     const response = await request(app.getHttpServer()).post('/run').send(RUN_INPUT);
     expect(response.status).toBe(503);
     expect(response.body.message).toContain('GEMINI_API_KEY');
@@ -62,7 +65,7 @@ describe('POST /run', () => {
 
   it('should stream Gemini events as server-sent events', async () => {
     googleStream.mockImplementation(twoEvents);
-    app = await createApp({ provider: 'google', apiKey: 'test-key', keyRequired: true, model: 'gemini-test', fallbackModels: [], firstEventTimeoutMs: 1000, replay: REPLAY });
+    app = await createApp({ provider: 'google', apiKey: 'test-key', keyRequired: true, model: 'gemini-test', fallbackModels: [], firstEventTimeoutMs: 1000, ollamaHost: 'http://localhost:11434', replay: REPLAY });
 
     const response = await postRun(app);
 
@@ -80,7 +83,7 @@ describe('POST /run', () => {
 
   it('should use the OpenAI adapter when that provider is configured', async () => {
     openaiStream.mockImplementation(twoEvents);
-    app = await createApp({ provider: 'openai', apiKey: 'test-key', keyRequired: true, model: 'gpt-test', fallbackModels: [], firstEventTimeoutMs: 1000, replay: REPLAY });
+    app = await createApp({ provider: 'openai', apiKey: 'test-key', keyRequired: true, model: 'gpt-test', fallbackModels: [], firstEventTimeoutMs: 1000, ollamaHost: 'http://localhost:11434', replay: REPLAY });
 
     await postRun(app);
 
@@ -90,7 +93,7 @@ describe('POST /run', () => {
 
   it('should use the Claude adapter with the larger token cap', async () => {
     anthropicStream.mockImplementation(twoEvents);
-    app = await createApp({ provider: 'anthropic', apiKey: 'test-key', keyRequired: false, model: 'claude-opus-5-5', fallbackModels: [], firstEventTimeoutMs: 1000, replay: REPLAY });
+    app = await createApp({ provider: 'anthropic', apiKey: 'test-key', keyRequired: false, model: 'claude-opus-5-5', fallbackModels: [], firstEventTimeoutMs: 1000, ollamaHost: 'http://localhost:11434', replay: REPLAY });
 
     await postRun(app);
 
@@ -100,9 +103,20 @@ describe('POST /run', () => {
     expect(googleStream).not.toHaveBeenCalled();
   });
 
+  it('should use the Ollama adapter with the configured host and no key', async () => {
+    ollamaStream.mockImplementation(twoEvents);
+    app = await createApp({ provider: 'ollama', apiKey: undefined, keyRequired: false, model: 'llama3.2', fallbackModels: [], firstEventTimeoutMs: 1000, ollamaHost: 'http://localhost:11434', replay: REPLAY });
+
+    const response = await postRun(app);
+
+    expect(response.status).toBe(200);
+    expect(ollamaStream).toHaveBeenCalledWith(expect.objectContaining({ model: 'llama3.2', host: 'http://localhost:11434', input: RUN_INPUT, transformRequestOptions: withOllamaDefaults }));
+    expect(googleStream).not.toHaveBeenCalled();
+  });
+
   it('should let Claude run without a key so the SDK can find its own credentials', async () => {
     anthropicStream.mockImplementation(twoEvents);
-    app = await createApp({ provider: 'anthropic', apiKey: undefined, keyRequired: false, model: 'claude-opus-5-5', fallbackModels: [], firstEventTimeoutMs: 1000, replay: REPLAY });
+    app = await createApp({ provider: 'anthropic', apiKey: undefined, keyRequired: false, model: 'claude-opus-5-5', fallbackModels: [], firstEventTimeoutMs: 1000, ollamaHost: 'http://localhost:11434', replay: REPLAY });
 
     const response = await postRun(app);
 
@@ -125,5 +139,27 @@ describe('withClaudeDefaults', () => {
       max_tokens: 64_000,
       output_config: { format: request.output_config.format, effort: 'medium' },
     });
+  });
+});
+
+describe('withOllamaDefaults', () => {
+  const schema = { type: 'object' };
+  const tools = [{ type: 'function' as const, function: { name: 'getMetrics', description: 'metrics' } }];
+  const user = { role: 'user' as const, content: 'How are we doing?' };
+
+  it('should withhold the schema while tools are still to be called', () => {
+    const request = { stream: true as const, model: 'llama3.2', messages: [user], tools, format: schema };
+    expect(withOllamaDefaults(request)).toEqual({ stream: true, model: 'llama3.2', messages: [user], tools, think: false });
+  });
+
+  it('should keep the schema once a tool result is in the history', () => {
+    const messages = [user, { role: 'assistant' as const, content: '' }, { role: 'tool' as const, content: '[]', tool_name: 'getMetrics' }];
+    const request = { stream: true as const, model: 'llama3.2', messages, tools, format: schema };
+    expect(withOllamaDefaults(request)).toEqual({ ...request, think: false });
+  });
+
+  it('should keep the schema of a run without tools and only switch thinking off', () => {
+    const request = { stream: true as const, model: 'llama3.2', messages: [user], format: schema };
+    expect(withOllamaDefaults(request)).toEqual({ ...request, think: false });
   });
 });

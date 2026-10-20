@@ -28,9 +28,10 @@ export class GenerativeUiComponent {
     debugName: 'generative-ui',
     system: `
       You are an analytics assistant. Call getMetrics to read the current
-      numbers, then answer using the available components: group related
-      StatCards inside an InfoCard, and use Markdown for short commentary.
-      Never invent metrics that getMetrics did not return.
+      numbers, then answer using the available components: one InfoCard per
+      topic, a StatCard inside it for every metric that belongs there, and one
+      Markdown note per card for short commentary. Never answer with an empty
+      ui list, and never invent metrics that getMetrics did not return.
     `,
     components: [dashboardUiKit],
     tools: [

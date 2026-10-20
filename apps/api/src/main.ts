@@ -19,6 +19,8 @@ const logger = new Logger('Bootstrap');
 logger.log(`Ready on http://${host}:${port}/api (${provider}: ${model})`);
 if (provider === 'replay') {
   logger.log('Replaying recorded fixtures; no model is called.');
+} else if (provider === 'ollama') {
+  logger.log(`Using Ollama at ${app.get<ConfigType<typeof hashbrownConfig>>(hashbrownConfig.KEY).ollamaHost}; no API key needed.`);
 } else if (!apiKey && keyRequired) {
   logger.warn(missingKeyMessage(provider));
 } else if (!apiKey) {
