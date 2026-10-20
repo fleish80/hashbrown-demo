@@ -3,6 +3,7 @@ import { createTool, RenderMessageComponent, uiChatResource } from '@hashbrownai
 import { AiStatusComponent } from '../../shared/ai-status/ai-status.component';
 import { ChatComposerComponent } from '../../shared/chat-composer/chat-composer.component';
 import { ExamplePageComponent } from '../../shared/example-page/example-page.component';
+import { PromptChipsComponent } from '../../shared/prompt-chips/prompt-chips.component';
 import { latchResourceValue } from '../../shared/latch-resource-value/latch-resource-value';
 import { ScrollToBottomDirective } from '../../shared/scroll-to-bottom/scroll-to-bottom.directive';
 import { dashboardUiKit } from './dashboard-ui-kit';
@@ -14,6 +15,7 @@ import { METRICS } from './metrics.data';
     ExamplePageComponent,
     ChatComposerComponent,
     AiStatusComponent,
+    PromptChipsComponent,
     ScrollToBottomDirective,
     RenderMessageComponent,
   ],
@@ -41,6 +43,12 @@ export class GenerativeUiComponent {
   });
 
   protected readonly messages = latchResourceValue(this.chat, []);
+
+  protected readonly prompts = [
+    'How are we doing this month?',
+    'Show me growth vs. performance',
+    'Which metric needs attention?',
+  ] as const;
 
   protected send(text: string): void {
     this.chat.sendMessage({ role: 'user', content: text });

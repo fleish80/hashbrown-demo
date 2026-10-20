@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:44:42.766Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": false,
+    "structured": false,
+    "lastUserMessage": "mark #2 as done",
+    "toolResults": [
+      {
+        "name": "listTodos",
+        "content": "[{\"id\":1,\"title\":\"Read the Hashbrown docs\",\"done\":true},{\"id\":2,\"title\":\"Wire up the /api/run endpoint\",\"done\":false},{\"id\":3,\"title\":\"Ship the demo\",\"done\":false}]"
+      },
+      {
+        "name": "completeTodo",
+        "content": "{\"id\":2,\"title\":\"Wire up the /api/run endpoint\",\"done\":true}"
+      }
+    ]
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "b0020825-9d0c-4d0f-9899-d202bc62af5f",
+      "runId": "24dbb205-1362-4b8c-8730-3820571ff88b"
+    },
+    {
+      "type": "TEXT_MESSAGE_START",
+      "messageId": "24dbb205-1362-4b8c-8730-3820571ff88b:assistant",
+      "role": "assistant"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "24dbb205-1362-4b8c-8730-3820571ff88b:assistant",
+      "delta": "I have marked todo #2 (\""
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "24dbb205-1362-4b8c-8730-3820571ff88b:assistant",
+      "delta": "Wire up the /api/run endpoint\") as done."
+    },
+    {
+      "type": "TEXT_MESSAGE_END",
+      "messageId": "24dbb205-1362-4b8c-8730-3820571ff88b:assistant"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "b0020825-9d0c-4d0f-9899-d202bc62af5f",
+      "runId": "24dbb205-1362-4b8c-8730-3820571ff88b"
+    }
+  ]
+}

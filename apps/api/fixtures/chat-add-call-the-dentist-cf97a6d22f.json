@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:43:41.333Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": false,
+    "structured": false,
+    "lastUserMessage": "add call the dentist",
+    "toolResults": []
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "af6b226f-08a0-46ba-8e75-9ffbf83f5e71",
+      "runId": "71284edf-0000-4b38-9d22-d620e2f501f2"
+    },
+    {
+      "type": "TOOL_CALL_START",
+      "toolCallId": "call_17346",
+      "toolCallName": "addTodo",
+      "parentMessageId": "71284edf-0000-4b38-9d22-d620e2f501f2:assistant",
+      "metadata": {
+        "google": {
+          "functionCall": true
+        }
+      }
+    },
+    {
+      "type": "TOOL_CALL_ARGS",
+      "toolCallId": "call_17346",
+      "delta": "{\"title\":\"call the dentist\"}"
+    },
+    {
+      "type": "REASONING_ENCRYPTED_VALUE",
+      "subtype": "tool-call",
+      "entityId": "call_17346",
+      "encryptedValue": "EooCCocCAWkUfRN5jc7cFMtNbZcSO+XQbJe6pmFZqAmXK3eIFsTA0Kcd6k2Sed+ANsJufZTWd2XniFPZx7DF6/QvZClzNna/1mTyGc1urrtyUX3WWOLM8Roi+YKqAElRobIQUMyy/46qjZedTGAS/VKuauFvAByUjWLoyvWICzelFb8uWZhANZA9MdclJV0yevOgsXyJ6Q00Q0mJCnZn2qRXatF9ovew+14/r9o0CDZL6CfrETxVSFI9LElopJkOX9hn1S0wLcFIJcp0pSO6Xgi1FqErnxGBx9fovWFqQ/7+QdsUzJZn0GAhTRXETIlv3W34Ti9XyM2bwJN1ykq9ilEHMco001UZUPApaqo="
+    },
+    {
+      "type": "TOOL_CALL_END",
+      "toolCallId": "call_17346"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "af6b226f-08a0-46ba-8e75-9ffbf83f5e71",
+      "runId": "71284edf-0000-4b38-9d22-d620e2f501f2"
+    }
+  ]
+}

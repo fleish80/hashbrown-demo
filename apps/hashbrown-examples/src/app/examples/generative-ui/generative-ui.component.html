@@ -3,9 +3,7 @@
 
   <div class="thread" [appScrollToBottom]="thread">
     @if (thread.length === 0) {
-      <p class="thread-empty">
-        Try: “How are we doing this month?” or “Show me growth vs. performance.”
-      </p>
+      <p class="thread-empty">Pick a question below or ask your own about the metrics.</p>
     }
     @for (message of thread; track $index) {
       @switch (message.role) {
@@ -29,6 +27,8 @@
     busyLabel="Composing…"
     [error]="chat.error()"
   />
+
+  <app-prompt-chips [prompts]="prompts" [disabled]="chat.isLoading()" (pick)="send($event)" />
 
   <app-chat-composer
     placeholder="Ask about the metrics…"

@@ -4,9 +4,9 @@ export const EXAMPLES: readonly ExampleDefinition[] = [
   {
     slug: 'basic-chat',
     title: 'Basic chat',
-    summary: 'Multi-turn streaming chat with chatResource',
+    summary: 'An Angular expert agent built on chatResource',
     description:
-      'The smallest useful Hashbrown app: a system prompt, a chat resource, streamed markdown replies rendered with hb-magic-text, and a stop button.',
+      'The smallest useful Hashbrown app: a system prompt that turns the model into a senior Angular engineer, a chat resource, streamed markdown replies rendered with hb-magic-text, and a stop button.',
     hashbrownApis: ['chatResource', 'hb-magic-text', 'provideHashbrown'],
     angularApis: ['signal forms', 'linkedSignal', 'afterRenderEffect', '@let'],
     loadComponent: () =>

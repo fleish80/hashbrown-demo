@@ -1,4 +1,4 @@
-<div class="shell">
+<div class="shell" [class.shell-inspector-open]="inspector.open()">
   <aside class="sidebar">
     <a class="brand" routerLink="/">
       <span class="brand-mark">🥔</span>
@@ -16,8 +16,21 @@
         </a>
       }
     </nav>
+    <button
+      class="inspector-toggle"
+      type="button"
+      [class.inspector-toggle-active]="inspector.open()"
+      [attr.aria-pressed]="inspector.open()"
+      (click)="inspector.toggle()"
+    >
+      <span class="inspector-toggle-label">AG-UI events</span>
+      <span class="inspector-toggle-count">{{ inspector.eventCount() }}</span>
+    </button>
   </aside>
   <main class="content">
     <router-outlet />
   </main>
+  @if (inspector.open()) {
+    <app-ag-ui-inspector-panel class="inspector" />
+  }
 </div>

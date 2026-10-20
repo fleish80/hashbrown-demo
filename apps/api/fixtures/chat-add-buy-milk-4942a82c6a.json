@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:43:13.737Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": false,
+    "structured": false,
+    "lastUserMessage": "add buy milk",
+    "toolResults": []
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "af6b226f-08a0-46ba-8e75-9ffbf83f5e71",
+      "runId": "11bf15dd-1fe6-49be-b94c-d51752cb6add"
+    },
+    {
+      "type": "TOOL_CALL_START",
+      "toolCallId": "call_73056",
+      "toolCallName": "addTodo",
+      "parentMessageId": "11bf15dd-1fe6-49be-b94c-d51752cb6add:assistant",
+      "metadata": {
+        "google": {
+          "functionCall": true
+        }
+      }
+    },
+    {
+      "type": "TOOL_CALL_ARGS",
+      "toolCallId": "call_73056",
+      "delta": "{\"title\":\"buy milk\"}"
+    },
+    {
+      "type": "REASONING_ENCRYPTED_VALUE",
+      "subtype": "tool-call",
+      "entityId": "call_73056",
+      "encryptedValue": "EvIKCu8KAWkUfRO9E5bxQoySDjlB6tz5uCTg1JN0FAwgNSCXE1rNrYK378mRc4TBG8VLgAyI/VMPmqgZL8/fp50CRlY+ILvC0X4dBBxdnASeafkJErm8/JZAhx6cluxWy13xx/76VgZ8HxN/lyj6hEZ572IthBr2b2R1EQGAg1R/25+RBybxH+wNqthW7x6cSl7IQtwrFjmZh6JwnfzoHqs1WJcYoOadYXK96fskqFyLWuT5grvV3cI9bV6VueLWsNk8P4wHTk2LHlh73Zt6xO+yfINexLp+SYagPtaBtinCgLU4ISdYucPwUHOf10teqgxSN8mw30yM+4D2/SB9QATFnMb116HbdoU92RTXy1yQmEKGonQWbVE6hJ2fkxwx23tuv8xK0Jy+527C2lJACfIro9D1ya0Gm11eqq9E9wWjD5Ei1TShL18sEhneoUuW/jVefeHGrRJDDNtxTTG1WYseKwkMyOgQU28LFheG3B5mbdSZBWe6EUzbpVJuy94abcMiDIq0QyTpyO+V34NdFkOkzJJh9UdLSGleljiUyXCMcJVPmOf1vKPOJZbuN77U/GCiEApctNCE7nahqZlN9mdrLhZ7f9ETCBoTvYGHH3IyBMbdud4mIWi9KVY59RSLgqlQRXcjQzzdd+Bf00YIlu8a/WWA37qZKGTc8iSmfKisRWUz+yN8hLcuU0JKQLRkxSxid3nWYTzV/qwuYYPykyNJ4pDF4NIZqhHqY2qqTJeu3pwxTIHwRQQrT16MaznT2h6PwQwFfOAVZBySXmB6teoywDGy0qoMDzMdsCNUyag9QwyRx/KuXu8fqQjK5KQoxiQBQllQxsADlOiH16zb/l8LuaFnrAhcOjiFE4RFdtzM6BRYUuMBBGV58hcavEqRHRHnsTX++RUe+QDt/O7Z0Ha3Uk8GayddCnbY7iBsQ9kUhHUwiO0WgtZDQ0gaMqP5yMj+TWGNEEodyblAr8hFxTW2o03h7i4OFKvaoKPX6u1K0O+WUG3HmXm9uFUh7xHpNE6OjI7KfjKSpddMXi25Wqsra3IRX3p/PHaWMTtWKCIslTDHctnALR7VNswnSdrTHxaGj7a4pVFQugJ4TUIE1foFR9e4irK3pr5icKCzG6TEOFpcw1iW9Mjlu+z/yQzqMMty5qRg70WtUWzDTqRKc1EgU9JBIwF9PaVo8xUb8Z/amnDAem8yMipgijU0XMTnsDMNluH+aOfwMwtTOBiKzS8GD2Uh87zgYpyMCol8RjsX/Rnl/QTY5K35mPi9GB89HYZTMNt2G56ZUH1VMynvcsuVxhI56y6wpI4ItGrXHm+P7EMSE7s9PAL+yyPRGTh/11Jp2Pbxon9WCPSE3QDcj4HQ8qnU7iRjAfrrqtRami+X6Anor76E7yg3JnjJQNVrCMOePUIy7mCDd+Xsv9+BGDg4y1CrhJG7f74qzpv2mO6YXH9IUJ/QFuJ7ZygZmo9WY16Nqn/a3zDbIBwmvJd7/DL1oIbbmu1zK1pyNzSjK3+W0akbQiTgAgEYODjlHH1p49DoQAoE5WVp6ZKWMVHT6VgIA3oocfwqxziYyobJM1aL/kHqsOFyTU3uPfdsQcyhgKXCLQKuaAfM73/S5rM7Y0LIhG3Oyyk9P+YvqG9cnrKa6kbYo7IkWzTK/XrYvWHCja/8LxaJ09Qh6nxwLAq83Sm9Ou3FPV4IX3t4si/0hRiVsNIv2hXuzny4xE4ibANePH7X/BxxUnInIkUWRzA56B2UzD6P/0pRV0LmQEyg7S4p9SVRopnnIU5jqFpKdujqHTmY+VLnoSa9ytmiMC7lC2KRKJ2wlNIyrDPN8PH1WncaUBRy9lWe+k/XrCfqcfpNoM0ND/8="
+    },
+    {
+      "type": "TOOL_CALL_END",
+      "toolCallId": "call_73056"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "af6b226f-08a0-46ba-8e75-9ffbf83f5e71",
+      "runId": "11bf15dd-1fe6-49be-b94c-d51752cb6add"
+    }
+  ]
+}

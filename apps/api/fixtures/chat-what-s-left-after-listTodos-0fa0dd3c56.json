@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:44:10.733Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": false,
+    "structured": false,
+    "lastUserMessage": "what's left?",
+    "toolResults": [
+      {
+        "name": "listTodos",
+        "content": "[{\"id\":1,\"title\":\"Read the Hashbrown docs\",\"done\":true},{\"id\":2,\"title\":\"Wire up the /api/run endpoint\",\"done\":false},{\"id\":3,\"title\":\"Ship the demo\",\"done\":false},{\"id\":4,\"title\":\"buy milk\",\"done\":false},{\"id\":5,\"title\":\"call the dentist\",\"done\":false}]"
+      }
+    ]
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "af6b226f-08a0-46ba-8e75-9ffbf83f5e71",
+      "runId": "f17343aa-7ad3-4429-842f-016eefe23a7a"
+    },
+    {
+      "type": "TEXT_MESSAGE_START",
+      "messageId": "f17343aa-7ad3-4429-842f-016eefe23a7a:assistant",
+      "role": "assistant"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "f17343aa-7ad3-4429-842f-016eefe23a7a:assistant",
+      "delta": "You have four items left to do: \"Wire up the /api/run endpoint\", \"Ship the"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "f17343aa-7ad3-4429-842f-016eefe23a7a:assistant",
+      "delta": " demo\", \"buy milk\", and \"call the dentist\"."
+    },
+    {
+      "type": "TEXT_MESSAGE_END",
+      "messageId": "f17343aa-7ad3-4429-842f-016eefe23a7a:assistant"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "af6b226f-08a0-46ba-8e75-9ffbf83f5e71",
+      "runId": "f17343aa-7ad3-4429-842f-016eefe23a7a"
+    }
+  ]
+}

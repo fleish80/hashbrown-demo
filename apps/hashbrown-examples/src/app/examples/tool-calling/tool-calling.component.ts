@@ -5,6 +5,7 @@ import { s } from '@hashbrownai/core';
 import { AiStatusComponent } from '../../shared/ai-status/ai-status.component';
 import { ChatComposerComponent } from '../../shared/chat-composer/chat-composer.component';
 import { ExamplePageComponent } from '../../shared/example-page/example-page.component';
+import { PromptChipsComponent } from '../../shared/prompt-chips/prompt-chips.component';
 import { latchResourceValue } from '../../shared/latch-resource-value/latch-resource-value';
 import { ScrollToBottomDirective } from '../../shared/scroll-to-bottom/scroll-to-bottom.directive';
 import { TodoStore } from './todo.store';
@@ -15,6 +16,7 @@ import { TodoStore } from './todo.store';
     ExamplePageComponent,
     ChatComposerComponent,
     AiStatusComponent,
+    PromptChipsComponent,
     ScrollToBottomDirective,
     JsonPipe,
     MagicText,
@@ -69,6 +71,8 @@ export class ToolCallingComponent {
   });
 
   protected readonly messages = latchResourceValue(this.chat, []);
+
+  protected readonly prompts = ['Add buy milk', 'Add call the dentist', "What's left?", 'Mark #2 as done'] as const;
 
   protected send(text: string): void {
     this.chat.sendMessage({ role: 'user', content: text });

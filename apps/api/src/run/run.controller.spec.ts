@@ -14,6 +14,7 @@ vi.mock('@hashbrownai/openai', () => ({ HashbrownOpenAI: { stream: { text: opena
 vi.mock('@hashbrownai/anthropic', () => ({ HashbrownAnthropic: { stream: { text: anthropicStream } } }));
 
 const RUN_INPUT = { threadId: 't', runId: 'r', messages: [], tools: [] };
+const REPLAY = { fixturesDir: 'fixtures', delayMs: 0, record: false };
 
 async function* twoEvents() {
   yield { type: 'RUN_STARTED', threadId: 't', runId: 'r' };
@@ -52,7 +53,7 @@ describe('POST /run', () => {
   });
 
   it('should return 503 naming the missing key', async () => {
-    app = await createApp({ provider: 'google', apiKey: undefined, keyRequired: true, model: 'm', fallbackModels: [], firstEventTimeoutMs: 1000 });
+    app = await createApp({ provider: 'google', apiKey: undefined, keyRequired: true, model: 'm', fallbackModels: [], firstEventTimeoutMs: 1000, replay: REPLAY });
     const response = await request(app.getHttpServer()).post('/run').send(RUN_INPUT);
     expect(response.status).toBe(503);
     expect(response.body.message).toContain('GEMINI_API_KEY');
@@ -61,7 +62,7 @@ describe('POST /run', () => {
 
   it('should stream Gemini events as server-sent events', async () => {
     googleStream.mockImplementation(twoEvents);
-    app = await createApp({ provider: 'google', apiKey: 'test-key', keyRequired: true, model: 'gemini-test', fallbackModels: [], firstEventTimeoutMs: 1000 });
+    app = await createApp({ provider: 'google', apiKey: 'test-key', keyRequired: true, model: 'gemini-test', fallbackModels: [], firstEventTimeoutMs: 1000, replay: REPLAY });
 
     const response = await postRun(app);
 
@@ -79,7 +80,7 @@ describe('POST /run', () => {
 
   it('should use the OpenAI adapter when that provider is configured', async () => {
     openaiStream.mockImplementation(twoEvents);
-    app = await createApp({ provider: 'openai', apiKey: 'test-key', keyRequired: true, model: 'gpt-test', fallbackModels: [], firstEventTimeoutMs: 1000 });
+    app = await createApp({ provider: 'openai', apiKey: 'test-key', keyRequired: true, model: 'gpt-test', fallbackModels: [], firstEventTimeoutMs: 1000, replay: REPLAY });
 
     await postRun(app);
 
@@ -89,7 +90,7 @@ describe('POST /run', () => {
 
   it('should use the Claude adapter with the larger token cap', async () => {
     anthropicStream.mockImplementation(twoEvents);
-    app = await createApp({ provider: 'anthropic', apiKey: 'test-key', keyRequired: false, model: 'claude-opus-5-5', fallbackModels: [], firstEventTimeoutMs: 1000 });
+    app = await createApp({ provider: 'anthropic', apiKey: 'test-key', keyRequired: false, model: 'claude-opus-5-5', fallbackModels: [], firstEventTimeoutMs: 1000, replay: REPLAY });
 
     await postRun(app);
 
@@ -101,7 +102,7 @@ describe('POST /run', () => {
 
   it('should let Claude run without a key so the SDK can find its own credentials', async () => {
     anthropicStream.mockImplementation(twoEvents);
-    app = await createApp({ provider: 'anthropic', apiKey: undefined, keyRequired: false, model: 'claude-opus-5-5', fallbackModels: [], firstEventTimeoutMs: 1000 });
+    app = await createApp({ provider: 'anthropic', apiKey: undefined, keyRequired: false, model: 'claude-opus-5-5', fallbackModels: [], firstEventTimeoutMs: 1000, replay: REPLAY });
 
     const response = await postRun(app);
 

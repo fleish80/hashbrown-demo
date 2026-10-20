@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:42:46.111Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": false,
+    "structured": true,
+    "lastUserMessage": "kyoto",
+    "toolResults": []
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "303ae068-126f-42d1-9512-2da00fb97ce8",
+      "runId": "673f837d-9a2f-4599-903a-2d878988eed7"
+    },
+    {
+      "type": "TEXT_MESSAGE_START",
+      "messageId": "673f837d-9a2f-4599-903a-2d878988eed7:assistant",
+      "role": "assistant"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "673f837d-9a2f-4599-903a-2d878988eed7:assistant",
+      "delta": "{\"city\":\"Kyoto\",\"v"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "673f837d-9a2f-4599-903a-2d878988eed7:assistant",
+      "delta": "ibe\":\"A serene blend of ancient temple traditions, traditional tea culture, and scenic historic strolls.\",\"days\":[{\"title"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "673f837d-9a2f-4599-903a-2d878988eed7:assistant",
+      "delta": "\":\"Saturday: Historic Temples and Gion Stroll\",\"activities\":[\"Start early at Fushimi Inari Taisha"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "673f837d-9a2f-4599-903a-2d878988eed7:assistant",
+      "delta": " to walk through thousands of vermilion torii gates.\",\"Explore the historic wooden stage and grounds of Kiyomizu-"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "673f837d-9a2f-4599-903a-2d878988eed7:assistant",
+      "delta": "dera Temple.\",\"Wander along the traditional preserved streets of Ninenzaka and Sannenzaka.\",\"Enjoy a"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "673f837d-9a2f-4599-903a-2d878988eed7:assistant",
+      "delta": " traditional Kaiseki dinner in the atmospheric Gion district.\"]},{\"title\":\"Sunday: Bamboo Groves and Golden Pavilions\",\"activities\":[\"Take a"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "673f837d-9a2f-4599-903a-2d878988eed7:assistant",
+      "delta": " peaceful morning walk through the Arashiyama Bamboo Grove.\",\"Visit Kinkaku-ji, the famous Golden Pavilion,"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "673f837d-9a2f-4599-903a-2d878988eed7:assistant",
+      "delta": " reflecting over its surrounding pond.\",\"Sample local street food and fresh produce at Nishiki Market.\",\"End your day with"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "673f837d-9a2f-4599-903a-2d878988eed7:assistant",
+      "delta": " a relaxing stroll along the Philosopher's Path.\"]}]}"
+    },
+    {
+      "type": "TEXT_MESSAGE_END",
+      "messageId": "673f837d-9a2f-4599-903a-2d878988eed7:assistant"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "303ae068-126f-42d1-9512-2da00fb97ce8",
+      "runId": "673f837d-9a2f-4599-903a-2d878988eed7"
+    }
+  ]
+}

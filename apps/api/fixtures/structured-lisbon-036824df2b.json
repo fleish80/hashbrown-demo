@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:42:15.641Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": false,
+    "structured": true,
+    "lastUserMessage": "lisbon",
+    "toolResults": []
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "303ae068-126f-42d1-9512-2da00fb97ce8",
+      "runId": "68a90405-6984-4207-aa1c-c9e95881a9d2"
+    },
+    {
+      "type": "TEXT_MESSAGE_START",
+      "messageId": "68a90405-6984-4207-aa1c-c9e95881a9d2:assistant",
+      "role": "assistant"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "68a90405-6984-4207-aa1c-c9e95881a9d2:assistant",
+      "delta": "{\"city\":\"Lisbon\",\"vibe\":\"A charming mix of sunny coastal views, historic pastel"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "68a90405-6984-4207-aa1c-c9e95881a9d2:assistant",
+      "delta": "-colored hills, soulful Fado music, and delicious custard tarts.\",\"days\":[{\"title\":\"Saturday: Belém and Alfama\",\""
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "68a90405-6984-4207-aa1c-c9e95881a9d2:assistant",
+      "delta": "activities\":[\"Start your morning with warm pastéis de nata at the iconic Pastéis de Belém.\",\"Explore the historic"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "68a90405-6984-4207-aa1c-c9e95881a9d2:assistant",
+      "delta": " Jerónimos Monastery and the nearby Belém Tower.\",\"Ride Tram 28 up to the ancient Alfama district"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "68a90405-6984-4207-aa1c-c9e95881a9d2:assistant",
+      "delta": " and wander its narrow alleys.\",\"Enjoy an intimate evening of live Fado music and wine in a local tavern.\"]},"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "68a90405-6984-4207-aa1c-c9e95881a9d2:assistant",
+      "delta": "{\"title\":\"Sunday: Baixa, Chiado, and Riverside\",\"activities\":[\"Walk through the grand Praça do Com"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "68a90405-6984-4207-aa1c-c9e95881a9d2:assistant",
+      "delta": "ércio towards the bustling Rua Augusta.\",\"Take the Santa Justa Lift to admire sweeping views of Lisbon's orange rooftops"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "68a90405-6984-4207-aa1c-c9e95881a9d2:assistant",
+      "delta": ".\",\"Browse the quirky shops and independent boutiques in the Chiado neighborhood.\",\"Watch the sunset over the Tagus River"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "68a90405-6984-4207-aa1c-c9e95881a9d2:assistant",
+      "delta": " with dinner and drinks at LX Factory.\"]}]}"
+    },
+    {
+      "type": "TEXT_MESSAGE_END",
+      "messageId": "68a90405-6984-4207-aa1c-c9e95881a9d2:assistant"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "303ae068-126f-42d1-9512-2da00fb97ce8",
+      "runId": "68a90405-6984-4207-aa1c-c9e95881a9d2"
+    }
+  ]
+}

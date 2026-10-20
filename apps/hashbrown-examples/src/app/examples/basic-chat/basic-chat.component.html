@@ -7,7 +7,7 @@
   <!-- The directive re-runs whenever `thread` changes and scrolls to the newest message. -->
   <div class="thread" [appScrollToBottom]="thread">
     @if (thread.length === 0) {
-      <p class="thread-empty">Say hello to start the conversation.</p>
+      <p class="thread-empty">Ask anything about Angular, or pick a question below.</p>
     }
 
     <!-- Hashbrown messages have no id and are rebuilt on every chunk, so position is the only stable key. -->
@@ -50,9 +50,11 @@
   <!-- isLoading covers the whole round trip. error() covers failures such as an HTTP 503. -->
   <app-ai-status [busy]="chat.isLoading()" [error]="chat.error()" />
 
+  <app-prompt-chips [prompts]="prompts" [disabled]="chat.isLoading()" (pick)="send($event)" />
+
   <!-- Step 2: the composer is a plain signal form. It only emits text; it knows nothing about Hashbrown. -->
   <app-chat-composer
-    placeholder="Ask anything…"
+    placeholder="Ask an Angular question…"
     [busy]="chat.isLoading()"
     (send)="send($event)"
     (stop)="stop()"

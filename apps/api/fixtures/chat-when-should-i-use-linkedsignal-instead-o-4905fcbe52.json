@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T06:11:51.711Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": false,
+    "structured": false,
+    "lastUserMessage": "when should i use linkedsignal instead of computed?",
+    "toolResults": []
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "f83a44e9-14f1-419a-bccf-a552e9c35a7f",
+      "runId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704"
+    },
+    {
+      "type": "TEXT_MESSAGE_START",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "role": "assistant"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": "Use "
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": "`computed` for read-only derived state. Use `linkedSignal` (introduced in Angular 19"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": ") when you have derived state that the user also needs to directly mutate, or when a dependency change should reset state to"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": " a new default while still allowing local overrides.\n\nHere is the key distinction:\n- **`computed`**: Pure"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": "ly reactive. If source signals change, the output updates automatically. You cannot manually write a new value to it.\n- **"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": "`linkedSignal`**: A mutable signal whose value automatically resets when its specified dependencies change.\n\n### Example: Resetting a Form"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": " Field on Selection\n\nImagine a user selection that determines a default shipping option, but the user is allowed to change it:"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": "\n\n```typescript\nimport { Component, signal, linkedSignal } from '@angular/core';\n\n@Component({\n  selector"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": ": 'app-shipping',\n  standalone: true,\n  template: `\n    <select (change)=\""
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": "updateUserSelection($event)\">\n      <option value=\"Standard\">Standard</option>\n      <option value=\"Express\">Express</"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": "option>\n    </select>\n\n    <p>Selected Shipping: {{ selectedShipping() }}</p>\n  "
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": "`\n})\nexport class ShippingComponent {\n  // The user's current shipping tier (derived from somewhere else)\n  selectedUser ="
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": " signal({ id: 1, defaultShipping: 'Standard' });\n\n  // Use linkedSignal so the shipping method updates if"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": " the user changes,\n  // but the user can still override this value locally.\n  selectedShipping = linkedSignal({"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": "\n    source: this.selectedUser,\n    computation: (user) => user.defaultShipping\n  });"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": "\n\n  updateUserSelection(event: Event) {\n    const value = (event.target as HTMLSelectElement"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": ").value;\n    // Direct mutation allowed! computed() would error here.\n    this.selectedShipping.set(value"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": "); \n  }\n}\n```\n\n### When to use which:\n* **`computed()`**: Use when the"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": " value is *strictly* a mathematical or logical projection of other signals (e.g., `fullName = computed(() => `${"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": "this.firstName()} ${this.lastName()}`)`).\n* **`linkedSignal()`**: Use when you need a starting"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant",
+      "delta": " point or a fallback driven by reactivity, but local user interaction needs to take over until the source dependency changes again."
+    },
+    {
+      "type": "TEXT_MESSAGE_END",
+      "messageId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704:assistant"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "f83a44e9-14f1-419a-bccf-a552e9c35a7f",
+      "runId": "15d78456-82d7-4cfa-9cea-fb7d5bb96704"
+    }
+  ]
+}

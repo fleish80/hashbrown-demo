@@ -1,0 +1,67 @@
+<header class="inspector-header">
+  <h2 class="inspector-title">AG-UI events</h2>
+  <label class="inspector-option">
+    <input type="checkbox" [checked]="inspector.collapseDeltas()" (change)="onCollapseChange($event)" />
+    Collapse deltas
+  </label>
+  <button class="inspector-button" type="button" (click)="inspector.clear()">Clear</button>
+  <button class="inspector-button" type="button" aria-label="Close inspector" (click)="inspector.toggle()">×</button>
+</header>
+
+<p class="inspector-hint">
+  Each run is one <code class="inspector-code">POST /api/run</code> and the server-sent events it streamed back.
+</p>
+
+<div class="inspector-runs">
+  @for (run of runs(); track run.id) {
+    <details class="run" [open]="$first">
+      <summary class="run-summary">
+        <span [class]="`run-status run-status-${run.status}`">{{ run.status }}</span>
+        <span class="run-prompt">{{ run.request.lastUserMessage || '(tool results sent back)' }}</span>
+        <span class="run-count">{{ run.events.length }} events</span>
+      </summary>
+
+      <dl class="run-request">
+        <dt class="run-request-label">messages</dt>
+        <dd class="run-request-value">{{ run.request.messageCount }}</dd>
+        <dt class="run-request-label">tools</dt>
+        <dd class="run-request-value">{{ run.request.tools.length ? run.request.tools.join(', ') : 'none' }}</dd>
+        <dt class="run-request-label">responseSchema</dt>
+        <dd class="run-request-value">{{ run.request.structured ? 'yes' : 'no' }}</dd>
+        <dt class="run-request-label">ui</dt>
+        <dd class="run-request-value">{{ run.request.ui ? 'yes' : 'no' }}</dd>
+      </dl>
+      <details class="run-body">
+        <summary class="run-body-summary">Request body</summary>
+        <pre class="payload">{{ run.request.body | json }}</pre>
+      </details>
+
+      <ol class="events">
+        @for (row of run.rows; track row.key) {
+          <li class="event">
+            <details class="event-details">
+              <summary class="event-summary">
+                <span class="event-at">+{{ row.at }} ms</span>
+                <span [class]="`event-type event-type-${row.category}`">
+                  {{ row.type }}
+                  @if (row.count > 1) {
+                    <span class="event-count">×{{ row.count }}</span>
+                  }
+                </span>
+                <span class="event-text">{{ row.summary }}</span>
+              </summary>
+              <pre class="payload">{{ row.payload | json }}</pre>
+            </details>
+          </li>
+        }
+      </ol>
+      @if (run.error) {
+        <p class="run-error">{{ run.error }}</p>
+      }
+    </details>
+  } @empty {
+    <p class="inspector-empty">
+      Send a message in any example. Every AG-UI event the server streams back will be listed here.
+    </p>
+  }
+</div>

@@ -16,6 +16,7 @@ import { chatResource, MagicText } from '@hashbrownai/angular';
 import { AiStatusComponent } from '../../shared/ai-status/ai-status.component';
 import { ChatComposerComponent } from '../../shared/chat-composer/chat-composer.component';
 import { ExamplePageComponent } from '../../shared/example-page/example-page.component';
+import { PromptChipsComponent } from '../../shared/prompt-chips/prompt-chips.component';
 import { latchResourceValue } from '../../shared/latch-resource-value/latch-resource-value';
 import { ScrollToBottomDirective } from '../../shared/scroll-to-bottom/scroll-to-bottom.directive';
 
@@ -25,6 +26,7 @@ import { ScrollToBottomDirective } from '../../shared/scroll-to-bottom/scroll-to
     ExamplePageComponent,
     ChatComposerComponent,
     AiStatusComponent,
+    PromptChipsComponent,
     ScrollToBottomDirective,
     // <hb-magic-text>: Hashbrown's markdown renderer, built to render text that is still streaming in.
     MagicText,
@@ -56,8 +58,19 @@ export class BasicChatComponent {
     // The system prompt. Hashbrown sends it as the first message of every request.
     // It is a ReactiveOption, so you can also pass a signal and change it at runtime.
     system: `
-      You are a friendly assistant embedded in an Angular demo app.
-      Answer concisely and use markdown formatting when it helps.
+      You are a senior Angular engineer helping a teammate, embedded in a demo app built with
+      Angular 22. Answer like a code reviewer: direct, concrete, and specific to Angular.
+
+      Prefer modern Angular and say so when it matters: standalone components, signals
+      (signal, computed, effect, linkedSignal), signal inputs and outputs (input(), output(),
+      model()), resource() and httpResource(), the @if / @for / @switch control flow, inject(),
+      and zoneless change detection. Treat NgModules, @Input and @Output decorators, *ngIf and
+      *ngFor, and constructor injection as legacy: show the modern equivalent when they come up.
+
+      Show short, complete TypeScript or template snippets in fenced code blocks and name the
+      Angular version a feature needs. Keep answers concise; use headings and lists only when
+      they help. If a question is not about Angular or the web platform, say so in one line and
+      steer back.
     `,
   });
 
@@ -68,6 +81,13 @@ export class BasicChatComponent {
    * and the template shows chat.error() separately.
    */
   protected readonly messages = latchResourceValue(this.chat, []);
+
+  // One-click prompts for demos; each goes through the same send() as typed text.
+  protected readonly prompts = [
+    'How do signal inputs replace @Input?',
+    'When should I use linkedSignal instead of computed?',
+    'Convert *ngFor with trackBy to @for',
+  ] as const;
 
   // Step 3: the composer emitted the text. sendMessage() appends it to value() immediately, so the
   // user bubble appears before the server has answered. Hashbrown then starts step 4 by itself:

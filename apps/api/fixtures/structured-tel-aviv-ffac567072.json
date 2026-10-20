@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:42:55.093Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": false,
+    "structured": true,
+    "lastUserMessage": "tel aviv",
+    "toolResults": []
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "303ae068-126f-42d1-9512-2da00fb97ce8",
+      "runId": "b656b4c1-d852-434d-b803-04d6dba3531a"
+    },
+    {
+      "type": "TEXT_MESSAGE_START",
+      "messageId": "b656b4c1-d852-434d-b803-04d6dba3531a:assistant",
+      "role": "assistant"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "b656b4c1-d852-434d-b803-04d6dba3531a:assistant",
+      "delta": "{\"city\":\"Tel Aviv\",\"vibe\":\"A lively Mediterranean getaway blending"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "b656b4c1-d852-434d-b803-04d6dba3531a:assistant",
+      "delta": " sun-soaked beaches, historic markets, rich Bauhaus architecture, and dynamic local cuisine.\",\"days\":[{\"title\":\"Saturday: Coastal Heritage and"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "b656b4c1-d852-434d-b803-04d6dba3531a:assistant",
+      "delta": " Neve Tzedek\",\"activities\":[\"Start your morning with a stroll along the beachfront promenade and fresh pomegranate juice.\",\"Explore the ancient winding stone"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "b656b4c1-d852-434d-b803-04d6dba3531a:assistant",
+      "delta": " alleyways and flea market of historic Old Jaffa.\",\"Enjoy a relaxed lunch of fresh seafood at the lively Jaffa Port overlooking"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "b656b4c1-d852-434d-b803-04d6dba3531a:assistant",
+      "delta": " the sea.\",\"Wander through the trendy boutiques and art galleries of the historic Neve Tzedek neighborhood.\"]},{\"title\":\"Sunday:"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "b656b4c1-d852-434d-b803-04d6dba3531a:assistant",
+      "delta": " Markets, Architecture, and Nightlife\",\"activities\":[\"Sample fresh pastries, halva, and spices while exploring the energetic Carmel Market.\",\"Take an"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "b656b4c1-d852-434d-b803-04d6dba3531a:assistant",
+      "delta": " architectural walking tour along Rothschild Boulevard to see the city's famous Bauhaus buildings.\",\"Relax with a iced coffee at a"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "b656b4c1-d852-434d-b803-04d6dba3531a:assistant",
+      "delta": " sidewalk café in the chic Florentin district.\",\"Dine on modern Israeli small plates at a lively restaurant near Habima"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "b656b4c1-d852-434d-b803-04d6dba3531a:assistant",
+      "delta": " Square.\"]}]}"
+    },
+    {
+      "type": "TEXT_MESSAGE_END",
+      "messageId": "b656b4c1-d852-434d-b803-04d6dba3531a:assistant"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "303ae068-126f-42d1-9512-2da00fb97ce8",
+      "runId": "b656b4c1-d852-434d-b803-04d6dba3531a"
+    }
+  ]
+}

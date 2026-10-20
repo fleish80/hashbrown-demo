@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:44:41.254Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": false,
+    "structured": false,
+    "lastUserMessage": "mark #2 as done",
+    "toolResults": [
+      {
+        "name": "listTodos",
+        "content": "[{\"id\":1,\"title\":\"Read the Hashbrown docs\",\"done\":true},{\"id\":2,\"title\":\"Wire up the /api/run endpoint\",\"done\":false},{\"id\":3,\"title\":\"Ship the demo\",\"done\":false}]"
+      }
+    ]
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "b0020825-9d0c-4d0f-9899-d202bc62af5f",
+      "runId": "0cd2c382-586d-4cb8-8c38-adcad710cd51"
+    },
+    {
+      "type": "TOOL_CALL_START",
+      "toolCallId": "call_37991",
+      "toolCallName": "completeTodo",
+      "parentMessageId": "0cd2c382-586d-4cb8-8c38-adcad710cd51:assistant",
+      "metadata": {
+        "google": {
+          "functionCall": true
+        }
+      }
+    },
+    {
+      "type": "TOOL_CALL_ARGS",
+      "toolCallId": "call_37991",
+      "delta": "{\"id\":2}"
+    },
+    {
+      "type": "REASONING_ENCRYPTED_VALUE",
+      "subtype": "tool-call",
+      "entityId": "call_37991",
+      "encryptedValue": "EroCCrcCAWkUfRMT6IA2e7Avf23fX/uZc74fCMqcZLpsw4q1Lm+zUZ+OdAnTP4cIz4eCCgFycV2GGBZT/KPjYflBJz2vvda0Lot4ka8mzCI5v/+/W7obVbOUz/KakoQltJo9DM6QLoMK3N9qN04Zb5SucRiM9ocMjMDG865WW3+qHEZNVTTm7xeVTIBO2F74u/y5yvoXAppaqqVNuX56aqck5fE7TqfzusknPk+tfxiHMhZGMf6/u4oBY9UvQaW/XFVzjfLgSkKcFJMH8NVbVghbsGCNyOSrxZnSs2AvZLGb0CD7HuAjSQM/BajalnfGvSRSxO3Wukf8+LSHdV2bldhBI1+3kWEBSrsS5EJe/pX3lhT7EwaAd0CrYrNBjRG1O3hpCFbI52qJjP6kvyxwbthOtqIUweHIOn8azpE="
+    },
+    {
+      "type": "TOOL_CALL_END",
+      "toolCallId": "call_37991"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "b0020825-9d0c-4d0f-9899-d202bc62af5f",
+      "runId": "0cd2c382-586d-4cb8-8c38-adcad710cd51"
+    }
+  ]
+}

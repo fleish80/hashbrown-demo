@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:45:03.301Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": true,
+    "structured": true,
+    "lastUserMessage": "how are we doing this month?",
+    "toolResults": [
+      {
+        "name": "getMetrics",
+        "content": "[{\"key\":\"active-users\",\"label\":\"Active users\",\"value\":12480,\"unit\":\"\",\"changePercent\":6.2},{\"key\":\"signups\",\"label\":\"New signups\",\"value\":342,\"unit\":\"\",\"changePercent\":-3.1},{\"key\":\"mrr\",\"label\":\"Monthly revenue\",\"value\":58200,\"unit\":\"USD\",\"changePercent\":4.8},{\"key\":\"churn\",\"label\":\"Churn rate\",\"value\":2.1,\"unit\":\"%\",\"changePercent\":0},{\"key\":\"latency\",\"label\":\"p95 latency\",\"value\":310,\"unit\":\"ms\",\"changePercent\":-12.5}]"
+      }
+    ]
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "21edb987-6872-4eeb-95e6-f1262f39c805",
+      "runId": "2165df37-f6b1-44e4-9d8f-c4aaa8b755ae"
+    },
+    {
+      "type": "TEXT_MESSAGE_START",
+      "messageId": "2165df37-f6b1-44e4-9d8f-c4aaa8b755ae:assistant",
+      "role": "assistant"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "2165df37-f6b1-44e4-9d8f-c4aaa8b755ae:assistant",
+      "delta": "{\"ui\":[{\"InfoCard\":{\"props\":{\"title\":\"Performance Overview\"},\"children\":[{\""
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "2165df37-f6b1-44e4-9d8f-c4aaa8b755ae:assistant",
+      "delta": "StatCard\":{\"props\":{\"label\":\"Active users\",\"value\":\"12,480\",\"trend\":\"up\"}}},{\"Stat"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "2165df37-f6b1-44e4-9d8f-c4aaa8b755ae:assistant",
+      "delta": "Card\":{\"props\":{\"label\":\"New signups\",\"value\":\"342\",\"trend\":\"down\"}}},{\"StatCard\":{\""
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "2165df37-f6b1-44e4-9d8f-c4aaa8b755ae:assistant",
+      "delta": "props\":{\"label\":\"Monthly revenue\",\"value\":\"58,200 USD\",\"trend\":\"up\"}}},{\"StatCard"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "2165df37-f6b1-44e4-9d8f-c4aaa8b755ae:assistant",
+      "delta": "\":{\"props\":{\"label\":\"Churn rate\",\"value\":\"2.1%\",\"trend\":\"flat\"}}},{\"StatCard\":{\"props\":{\"label\":\""
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "2165df37-f6b1-44e4-9d8f-c4aaa8b755ae:assistant",
+      "delta": "p95 latency\",\"value\":\"310 ms\",\"trend\":\"down\"}}},{\"Markdown\":{\"props\":{\"children\":\"Here"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "2165df37-f6b1-44e4-9d8f-c4aaa8b755ae:assistant",
+      "delta": " is the current performance summary for this month. Active users and monthly revenue continue to grow, while latency has significantly improved.\""
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "2165df37-f6b1-44e4-9d8f-c4aaa8b755ae:assistant",
+      "delta": "}}}]}}]} "
+    },
+    {
+      "type": "TEXT_MESSAGE_END",
+      "messageId": "2165df37-f6b1-44e4-9d8f-c4aaa8b755ae:assistant"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "21edb987-6872-4eeb-95e6-f1262f39c805",
+      "runId": "2165df37-f6b1-44e4-9d8f-c4aaa8b755ae"
+    }
+  ]
+}

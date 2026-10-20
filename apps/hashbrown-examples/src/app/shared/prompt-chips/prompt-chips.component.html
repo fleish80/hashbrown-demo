@@ -1,0 +1,7 @@
+<div class="chips" role="group" aria-label="Example prompts">
+  @for (prompt of prompts(); track prompt) {
+    <button class="chip" type="button" [disabled]="disabled()" (click)="pick.emit(prompt)">
+      {{ prompt }}
+    </button>
+  }
+</div>

@@ -1,4 +1,6 @@
 <app-example-page>
+  <app-prompt-chips [prompts]="prompts" [disabled]="itinerary.isLoading()" (pick)="planTrip($event)" />
+
   <app-chat-composer
     placeholder="Which city? e.g. Lisbon"
     [busy]="itinerary.isLoading()"
@@ -52,6 +54,6 @@
       <pre class="raw-json">{{ result | json }}</pre>
     </details>
   } @else if (!itinerary.isLoading()) {
-    <p class="hint">Type a city and press Send. Watch the days appear one by one as the JSON streams in.</p>
+    <p class="hint">Pick a city or type one. Watch the days appear one by one as the JSON streams in.</p>
   }
 </app-example-page>

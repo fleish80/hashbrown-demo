@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:44:02.708Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": false,
+    "structured": false,
+    "lastUserMessage": "add call the dentist",
+    "toolResults": [
+      {
+        "name": "addTodo",
+        "content": "{\"id\":5,\"title\":\"call the dentist\",\"done\":false}"
+      }
+    ]
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "af6b226f-08a0-46ba-8e75-9ffbf83f5e71",
+      "runId": "6955ea5c-9c05-4ffe-bde4-bb66b7848cb7"
+    },
+    {
+      "type": "TEXT_MESSAGE_START",
+      "messageId": "6955ea5c-9c05-4ffe-bde4-bb66b7848cb7:assistant",
+      "role": "assistant"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "6955ea5c-9c05-4ffe-bde4-bb66b7848cb7:assistant",
+      "delta": "I"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "6955ea5c-9c05-4ffe-bde4-bb66b7848cb7:assistant",
+      "delta": " have added \"call the dentist\" to your todo list."
+    },
+    {
+      "type": "TEXT_MESSAGE_END",
+      "messageId": "6955ea5c-9c05-4ffe-bde4-bb66b7848cb7:assistant"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "af6b226f-08a0-46ba-8e75-9ffbf83f5e71",
+      "runId": "6955ea5c-9c05-4ffe-bde4-bb66b7848cb7"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:45:11.426Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": true,
+    "structured": true,
+    "lastUserMessage": "show me growth vs. performance",
+    "toolResults": [
+      {
+        "name": "getMetrics",
+        "content": "[{\"key\":\"active-users\",\"label\":\"Active users\",\"value\":12480,\"unit\":\"\",\"changePercent\":6.2},{\"key\":\"signups\",\"label\":\"New signups\",\"value\":342,\"unit\":\"\",\"changePercent\":-3.1},{\"key\":\"mrr\",\"label\":\"Monthly revenue\",\"value\":58200,\"unit\":\"USD\",\"changePercent\":4.8},{\"key\":\"churn\",\"label\":\"Churn rate\",\"value\":2.1,\"unit\":\"%\",\"changePercent\":0},{\"key\":\"latency\",\"label\":\"p95 latency\",\"value\":310,\"unit\":\"ms\",\"changePercent\":-12.5}]"
+      }
+    ]
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "21edb987-6872-4eeb-95e6-f1262f39c805",
+      "runId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d"
+    },
+    {
+      "type": "TEXT_MESSAGE_START",
+      "messageId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d:assistant",
+      "role": "assistant"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d:assistant",
+      "delta": "{\"ui\":[{\"InfoCard\":{\"props\":{\"title\":\"Growth Metrics\"},\"children\":[{\"StatCard\":{\""
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d:assistant",
+      "delta": "props\":{\"label\":\"Active users\",\"value\":\"12,480\",\"trend\":\"up\"}}},{\"StatCard\":{\""
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d:assistant",
+      "delta": "props\":{\"label\":\"New signups\",\"value\":\"342\",\"trend\":\"down\"}}},{\"StatCard\":{\"props\":{\""
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d:assistant",
+      "delta": "label\":\"Monthly revenue\",\"value\":\"58,200 USD\",\"trend\":\"up\"}}},{\"Markdown\":{\"props\":{\""
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d:assistant",
+      "delta": "children\":\"Growth is steady with strong active users and revenue increases, despite a slight dip in new signups.\"}}}]}},"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d:assistant",
+      "delta": "{\"InfoCard\":{\"props\":{\"title\":\"Performance Metrics\"},\"children\":[{\"StatCard\":{\"props\":{\"label\":\"Churn rate\",\"value\":\"2."
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d:assistant",
+      "delta": "1%\",\"trend\":\"flat\"}}},{\"StatCard\":{\"props\":{\"label\":\"p95 latency\",\"value\":\"310"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d:assistant",
+      "delta": " ms\",\"trend\":\"down\"}}},{\"Markdown\":{\"props\":{\"children\":\"System performance remains solid with improved latency and stable churn.\""
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d:assistant",
+      "delta": "}}}]}}]}"
+    },
+    {
+      "type": "TEXT_MESSAGE_END",
+      "messageId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d:assistant"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "21edb987-6872-4eeb-95e6-f1262f39c805",
+      "runId": "7a8d402e-806f-4ce6-a0dd-5a5cb828154d"
+    }
+  ]
+}

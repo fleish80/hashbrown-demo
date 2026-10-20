@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:45:09.574Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": true,
+    "structured": true,
+    "lastUserMessage": "show me growth vs. performance",
+    "toolResults": []
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "21edb987-6872-4eeb-95e6-f1262f39c805",
+      "runId": "ad63bfca-9054-4a74-ac92-43dbed96a5bf"
+    },
+    {
+      "type": "TOOL_CALL_START",
+      "toolCallId": "call_40049",
+      "toolCallName": "getMetrics",
+      "parentMessageId": "ad63bfca-9054-4a74-ac92-43dbed96a5bf:assistant",
+      "metadata": {
+        "google": {
+          "functionCall": true
+        }
+      }
+    },
+    {
+      "type": "TOOL_CALL_ARGS",
+      "toolCallId": "call_40049",
+      "delta": "{}"
+    },
+    {
+      "type": "REASONING_ENCRYPTED_VALUE",
+      "subtype": "tool-call",
+      "entityId": "call_40049",
+      "encryptedValue": "EmAKXgFpFH0T3VzzCPxUeByHW9aEc6UsVldgYL4ClEtbtcbq1Ot03bm/8bqJ8r1DEwMZHG5xWgvkrx0l6vQuyHJ0I/umamA6ILcj7hG6hxvkKhRIBIajAmZ1y4sG0xYw/98="
+    },
+    {
+      "type": "TOOL_CALL_END",
+      "toolCallId": "call_40049"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "21edb987-6872-4eeb-95e6-f1262f39c805",
+      "runId": "ad63bfca-9054-4a74-ac92-43dbed96a5bf"
+    }
+  ]
+}

@@ -23,9 +23,7 @@
     <section class="chat">
       <div class="thread" [appScrollToBottom]="thread">
         @if (thread.length === 0) {
-          <p class="thread-empty">
-            Try: “add buy milk”, “what's left?”, or “mark #2 as done”.
-          </p>
+          <p class="thread-empty">Pick a prompt below, or tell the assistant what to do with the list.</p>
         }
         @for (message of thread; track $index) {
           @switch (message.role) {
@@ -60,6 +58,8 @@
         [busyLabel]="chat.isRunningToolCalls() ? 'Running tools…' : 'Thinking…'"
         [error]="chat.error()"
       />
+
+      <app-prompt-chips [prompts]="prompts" [disabled]="chat.isLoading()" (pick)="send($event)" />
 
       <app-chat-composer
         placeholder="Tell me what to do with the list…"

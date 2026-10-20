@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:44:08.627Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": false,
+    "structured": false,
+    "lastUserMessage": "what's left?",
+    "toolResults": []
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "af6b226f-08a0-46ba-8e75-9ffbf83f5e71",
+      "runId": "50cb87d2-9ec1-4654-8a6c-d4d700a74aeb"
+    },
+    {
+      "type": "TOOL_CALL_START",
+      "toolCallId": "call_38171",
+      "toolCallName": "listTodos",
+      "parentMessageId": "50cb87d2-9ec1-4654-8a6c-d4d700a74aeb:assistant",
+      "metadata": {
+        "google": {
+          "functionCall": true
+        }
+      }
+    },
+    {
+      "type": "TOOL_CALL_ARGS",
+      "toolCallId": "call_38171",
+      "delta": "{}"
+    },
+    {
+      "type": "REASONING_ENCRYPTED_VALUE",
+      "subtype": "tool-call",
+      "entityId": "call_38171",
+      "encryptedValue": "Er0DCroDAWkUfRNDvGSa4j79ulDNq9i/Hf+j2F7Myq6IABPRI4hlt2LjyC8LCOxGXbEJXozy0MMf7Brx2kDVSfmunIE/n7HomEdXyOEnsEWQDxr4LFRFra4KB3oiyXIu8U9EXsgh7LA4v1vQ4FoCSBcspIxtmVYJbJo1OdBMUkBa3KBLKNvuwJaTVANWvoiIfe1vZkahKGeuXeoNEPjgmZF2gRscIq/+KjK6OpXv2BmGhjTyo1DKOmygBia+MJ1xVTzaScAMQLPoWDgIB46IBOQArDdsjccLgdhT0YPxB9WGjCinW61HCiayvyQPDCuPgi65a/bGQMb0tekEi5BJn8BjK/eSyJmZQJII+RvoXsOQe2ZvgtrhFHNXETdYWlndWV43/Cu5cOsiEBSXCaewyoBaBKIBedEako1y20mwQJ0ETg27EFly9MBkCISL8n/v+P0CHdxFipeas215lnDb7JTNfc1YJJbyKO+IcE0VFDxhoabDPmEi1zroXKFelQkyS4gchFP6b1a6W5zcdw33wYOpovMGrNwa+5LNUiUy3eMpkIW548DWkfaV53dPtmjhsQTznTdrh/s3/+/SFsG1OA=="
+    },
+    {
+      "type": "TOOL_CALL_END",
+      "toolCallId": "call_38171"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "af6b226f-08a0-46ba-8e75-9ffbf83f5e71",
+      "runId": "50cb87d2-9ec1-4654-8a6c-d4d700a74aeb"
+    }
+  ]
+}

@@ -17,7 +17,9 @@ await app.listen(port, host);
 const { provider, model, apiKey, keyRequired } = app.get<ConfigType<typeof hashbrownConfig>>(hashbrownConfig.KEY);
 const logger = new Logger('Bootstrap');
 logger.log(`Ready on http://${host}:${port}/api (${provider}: ${model})`);
-if (!apiKey && keyRequired) {
+if (provider === 'replay') {
+  logger.log('Replaying recorded fixtures; no model is called.');
+} else if (!apiKey && keyRequired) {
   logger.warn(missingKeyMessage(provider));
 } else if (!apiKey) {
   logger.log('No API key in .env; the Anthropic SDK will use ANTHROPIC_AUTH_TOKEN or an `ant auth login` profile.');

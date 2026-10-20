@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:43:15.086Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": false,
+    "structured": false,
+    "lastUserMessage": "add buy milk",
+    "toolResults": [
+      {
+        "name": "addTodo",
+        "content": "{\"id\":4,\"title\":\"buy milk\",\"done\":false}"
+      }
+    ]
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "af6b226f-08a0-46ba-8e75-9ffbf83f5e71",
+      "runId": "5b57eb36-4597-4f2b-87ef-0cfb4f2af4cd"
+    },
+    {
+      "type": "TEXT_MESSAGE_START",
+      "messageId": "5b57eb36-4597-4f2b-87ef-0cfb4f2af4cd:assistant",
+      "role": "assistant"
+    },
+    {
+      "type": "TEXT_MESSAGE_CONTENT",
+      "messageId": "5b57eb36-4597-4f2b-87ef-0cfb4f2af4cd:assistant",
+      "delta": "I have added \"buy milk\" to your todo list."
+    },
+    {
+      "type": "TEXT_MESSAGE_END",
+      "messageId": "5b57eb36-4597-4f2b-87ef-0cfb4f2af4cd:assistant"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "af6b226f-08a0-46ba-8e75-9ffbf83f5e71",
+      "runId": "5b57eb36-4597-4f2b-87ef-0cfb4f2af4cd"
+    }
+  ]
+}

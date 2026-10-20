@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "recordedAt": "2026-10-20T04:45:17.572Z",
+  "provider": "google",
+  "models": "gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite",
+  "fingerprint": {
+    "ui": true,
+    "structured": true,
+    "lastUserMessage": "which metric needs attention?",
+    "toolResults": []
+  },
+  "events": [
+    {
+      "type": "RUN_STARTED",
+      "threadId": "21edb987-6872-4eeb-95e6-f1262f39c805",
+      "runId": "a562acc5-346a-464b-b935-fec64408baae"
+    },
+    {
+      "type": "TOOL_CALL_START",
+      "toolCallId": "call_50849",
+      "toolCallName": "getMetrics",
+      "parentMessageId": "a562acc5-346a-464b-b935-fec64408baae:assistant",
+      "metadata": {
+        "google": {
+          "functionCall": true
+        }
+      }
+    },
+    {
+      "type": "TOOL_CALL_ARGS",
+      "toolCallId": "call_50849",
+      "delta": "{}"
+    },
+    {
+      "type": "REASONING_ENCRYPTED_VALUE",
+      "subtype": "tool-call",
+      "entityId": "call_50849",
+      "encryptedValue": "EmAKXgFpFH0T6Q0jgYJI8PVule5APIZ2LDh20Ask8M0HbNPRTP+Y12wx8wt3lYn8vOR+lo1G66c/Jfka8R53uVtJTn5A+9OtYnRRmfCtwq7ScqkpXlOiMBoB+SvG+yXAmV4="
+    },
+    {
+      "type": "TOOL_CALL_END",
+      "toolCallId": "call_50849"
+    },
+    {
+      "type": "RUN_FINISHED",
+      "threadId": "21edb987-6872-4eeb-95e6-f1262f39c805",
+      "runId": "a562acc5-346a-464b-b935-fec64408baae"
+    }
+  ]
+}

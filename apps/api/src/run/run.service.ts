@@ -5,6 +5,8 @@ import { HashbrownOpenAI } from '@hashbrownai/openai';
 import { Inject, Injectable, Logger, ServiceUnavailableException } from '@nestjs/common';
 import type { ConfigType } from '@nestjs/config';
 import { hashbrownConfig, missingKeyMessage } from '../config/hashbrown.config.js';
+import { recordRun } from '../replay/fixture-recorder.js';
+import { ReplayService } from '../replay/replay.service.js';
 import { streamWithModelFallback } from './model-fallback.js';
 
 type ClaudeRequest = Parameters<
@@ -31,6 +33,7 @@ export class RunService {
   constructor(
     @Inject(hashbrownConfig.KEY)
     private readonly config: ConfigType<typeof hashbrownConfig>,
+    private readonly replay: ReplayService,
   ) {}
 
   /**
@@ -41,7 +44,11 @@ export class RunService {
    * model returns back into AG-UI events. Swapping providers therefore never touches the Angular app.
    */
   stream(input: RunAgentInput, signal: AbortSignal): AsyncIterable<BaseEvent> {
-    const { provider, apiKey, keyRequired, model, fallbackModels, firstEventTimeoutMs } = this.config;
+    const { provider, apiKey, keyRequired, model, fallbackModels, firstEventTimeoutMs, replay } = this.config;
+    // LLM_PROVIDER=replay: no model at all, recorded fixtures are streamed back instead.
+    if (provider === 'replay') {
+      return this.replay.stream(input, signal);
+    }
     if (!apiKey && keyRequired) {
       throw new ServiceUnavailableException(missingKeyMessage(provider));
     }
@@ -65,12 +72,15 @@ export class RunService {
     };
 
     // If a model is overloaded or silent for too long before any text, retry on the next model.
-    return streamWithModelFallback([model, ...fallbackModels], start, {
+    const models = [model, ...fallbackModels];
+    const events = streamWithModelFallback(models, start, {
       firstEventTimeoutMs,
       onFallback: (failed, next, reason) =>
         this.logger.warn(
           `${failed} ${reason === 'timeout' ? `sent nothing for ${firstEventTimeoutMs / 1000}s` : 'is unavailable'}, retrying the run on ${next}`,
         ),
     });
+    // RECORD_FIXTURES=true: save the finished run so LLM_PROVIDER=replay can serve it later.
+    return replay.record ? recordRun(replay.fixturesDir, { provider, models: models.join(',') }, input, events) : events;
   }
 }

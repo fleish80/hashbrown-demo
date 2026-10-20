@@ -3,8 +3,10 @@ import { existsSync, readdirSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 
-export const LLM_PROVIDERS = ['google', 'openai', 'anthropic'] as const;
+/** 'replay' serves recorded fixtures instead of calling a model (see src/replay). */
+export const LLM_PROVIDERS = ['google', 'openai', 'anthropic', 'replay'] as const;
 export type LlmProvider = (typeof LLM_PROVIDERS)[number];
+export type ModelProvider = Exclude<LlmProvider, 'replay'>;
 
 interface ProviderSettings {
   readonly keyVar: string;
@@ -14,7 +16,7 @@ interface ProviderSettings {
   readonly keyRequired: boolean;
 }
 
-const PROVIDERS: Record<LlmProvider, ProviderSettings> = {
+const PROVIDERS: Record<ModelProvider, ProviderSettings> = {
   google: {
     keyVar: 'GEMINI_API_KEY',
     modelVar: 'GEMINI_MODEL',
@@ -30,7 +32,7 @@ export function isLlmProvider(value: unknown): value is LlmProvider {
   return (LLM_PROVIDERS as readonly unknown[]).includes(value);
 }
 
-export function missingKeyMessage(provider: LlmProvider): string {
+export function missingKeyMessage(provider: ModelProvider): string {
   if (provider === 'anthropic') {
     const profile = process.env['ANTHROPIC_PROFILE'];
     const login = profile ? `ant --profile ${profile} auth login` : 'ant auth login';
@@ -67,8 +69,37 @@ function resolveProvider(): LlmProvider {
   return process.env['OPENAI_API_KEY'] ? 'openai' : 'google';
 }
 
+export interface ReplaySettings {
+  /** Where recorded runs live; relative to the API's working directory (apps/api). */
+  readonly fixturesDir: string;
+  /** Pause between replayed events, so streaming still looks like streaming. */
+  readonly delayMs: number;
+  /** With a real provider: also write every finished run to fixturesDir. */
+  readonly record: boolean;
+}
+
+function replaySettings(): ReplaySettings {
+  return {
+    fixturesDir: process.env['FIXTURES_DIR'] || 'fixtures',
+    delayMs: Number(process.env['REPLAY_DELAY_MS'] ?? 15),
+    record: process.env['RECORD_FIXTURES'] === 'true',
+  };
+}
+
 export const hashbrownConfig = registerAs('hashbrown', () => {
   const provider = resolveProvider();
+  const firstEventTimeoutMs = Number(process.env['MODEL_FIRST_EVENT_TIMEOUT_MS'] || 20_000);
+  if (provider === 'replay') {
+    return {
+      provider,
+      apiKey: undefined,
+      keyRequired: false,
+      model: 'recorded fixtures',
+      fallbackModels: [] as string[],
+      firstEventTimeoutMs,
+      replay: replaySettings(),
+    };
+  }
   const { keyVar, modelVar, defaultModel } = PROVIDERS[provider];
   const keyRequired = PROVIDERS[provider].keyRequired || (provider === 'anthropic' && !hasAnthropicSdkCredentials());
   const models = (process.env[modelVar] || defaultModel)
@@ -81,7 +112,8 @@ export const hashbrownConfig = registerAs('hashbrown', () => {
     keyRequired,
     model: models[0] ?? defaultModel,
     fallbackModels: models.slice(1),
-    firstEventTimeoutMs: Number(process.env['MODEL_FIRST_EVENT_TIMEOUT_MS'] || 20_000),
+    firstEventTimeoutMs,
+    replay: replaySettings(),
   };
 });
 
